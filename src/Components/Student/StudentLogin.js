@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StrengthLogin from '../Strength/StrengthLogin';
+
 
 class StudentLogin extends Component {
     render(){
