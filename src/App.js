@@ -1,24 +1,29 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import './Components/Landing';
+import Landing from './Components/Landing';
+import StaffLogin from './Components/Staff /StaffLogin';
+import StaffNav from './Components/Staff /StaffNav';
+import EditGame from './Components/Staff /EditGame';
+import EditStudent from './Components/Staff /EditStudent';
+import StrengthLogin from './Components/Strength/StrengthLogin';
+import GameNotes from './Components/Strength/GameNotes';
+import StudentLogin from './Components/Student/StudentLogin'
+import DropSlip from './Components/Student/DropSlip'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Landing/>
+      <StaffLogin/>
+      <StaffNav/>
+      <EditGame/>
+      <EditStudent/>
+      <StrengthLogin/>
+      <GameNotes/>
+      <StudentLogin/>
+      <DropSlip/>
+      
     </div>
   );
 }
