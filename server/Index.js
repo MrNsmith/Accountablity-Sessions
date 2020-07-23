@@ -3,7 +3,8 @@ require ('dotenv').config();
 const express = require('express'),
     massive = require('massive'),
     session = require('express-session'),
-    authCtrl = require('./authStudentCtrl'),
+    studentCtrl = require('./authStudentCtrl'),
+    staffCtrl = require('./authStaffCtrl'),
     {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
     port = SERVER_PORT,
     app = express();
@@ -24,10 +25,16 @@ massive({
     app.set('db', db);
     console.log('Data Base Connected')
 });
-//Auth EndPoints
-app.post(`/api/register`, authCtrl.AddNewStudent)
-app.post(`/api/login` , authCtrl.LoginStudent)
-app.get(`/api/logout`, authCtrl.LogOut)
+//Student-Auth EndPoints
+app.post(`/api/student`, studentCtrl.NewStudent)
+app.post(`/api/student-login` , studentCtrl.LoginStudent)
+app.get(`/api/student-logout`, studentCtrl.LogOut)
+//Staff-Auth EndPoints
+app.post(`/api/staff`, staffCtrl.NewStaff)
+app.post(`/api/staff-login` , staffCtrl.LoginStaff)
+app.get(`/api/staff-logout`, staffCtrl.LogOut)
+
+
 
 app.listen(port, ()=> console.log(`Listening on ${port}`));
 

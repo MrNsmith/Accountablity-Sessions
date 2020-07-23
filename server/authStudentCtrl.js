@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 module.exports = {
-        AddNewStudent: async (req, res)=>{
+        NewStudent: async (req, res)=>{
             //this is what it needs to add a new student
             const {first_name,last_name, password } = req.body,
                 db = req.app.get('db');
