@@ -1,41 +1,36 @@
-import React,{useState} from 'react';
+import React, { useState} from 'react';
+import StaffNav from './StaffNav'
 import axios from 'axios'
-import StudentNav from '../Student/StudentNav';
-
-
-
-const StrengthLogin = (props) => {
+ const EditStudent =(props)=>  {
     let [first_name, setFirstname] = useState(''),
         [last_name, setLastname] = useState(''),
         [password, setPassword] = useState('');
-    
-   let handleLogin = ()=> {
-        axios.post('/api/student-login', {first_name,last_name,password})
-        //need to send to redux
-        .then((res) => {
-            console.log(res.data)
-            props.history.push('/strength/game-notes');
-        })
-        .catch(err=> {
-            console.log(err)
-        })
-    }
-        return (
-            <div>
-                Strength Login
+
+    let handleNewStudent = ()=> {
+        axios.post('/api/student' , {first_name,last_name,password})
+     
+        .then((res)=> res.sendStatus(200))
+        .catch((err)=>console.log(err))
+    }   
+        
+    return (
+        <div>
+            <h1>Add Student</h1>
+                <StaffNav/>
                 <form>
                    <input
                    value={first_name}
                    placeholder='First Name'
-                   name="firstName"
+                   name="first_name"
                    onChange={e => setFirstname(e.target.value)}
                    />
                    <input
                    value={last_name}
                    placeholder='Last Name'
-                   name='lastName'
+                   name='last_name'
                    onChange={e => setLastname(e.target.value)}
                    />
+                  
                    <input
                    value={password}
                    type='password'
@@ -43,14 +38,12 @@ const StrengthLogin = (props) => {
                    name='password'
                    onChange={e => setPassword(e.target.value)}
                    />
-                   <button onClick={handleLogin}>Login</button>
+                   {first_name}
+                   <button onClick={handleNewStudent}>ADD</button>
                 </form>
 
-                <StudentNav/>
+        </div>
+    )
 
-            </div>
-        )
-          
-    
 }
-export default StrengthLogin
+export default EditStudent;

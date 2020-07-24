@@ -17,6 +17,7 @@ module.exports = {
             //Creating new Student
             const newStudent = await db.auth_student.add_student({first_name, last_name, password:hash})
             delete newStudent[0].password
+            req.session.user
             res.status(201).send(req.session.user)
 
         },

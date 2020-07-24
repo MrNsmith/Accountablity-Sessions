@@ -1,2 +1,3 @@
-select * from staff 
-where email = ${email};
+select * from staff
+where first_name = ${first_name}
+and last_name = ${last_name};

@@ -1,5 +1,5 @@
 insert into staff
-(first_name, last_name, password, email, profile_pic)
+(first_name,last_name,email,password,student_id,profile_pic)
 values
-(${first_name},${last_name},${password},${email}, null)
+(${first_name}, ${last_name}, ${email},${password}, null,null)
 returning *;
