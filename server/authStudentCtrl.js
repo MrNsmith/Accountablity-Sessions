@@ -46,6 +46,15 @@ module.exports = {
             req.session.destroy();
             res.sendStatus(200);
 
+        },
+        //Keeps Students Logged in
+        StudentLoggedIn: async( req, res)=> {
+            const db = req.app.get('db');
+            if (req.session.user){
+                console.log (req.session.user.student_id, "Logged in ctrl");
+                const me = await db.auth_student.get_student_id(req.session.user.student_id);
+                res.status(200).send(me[0]);
+            }
         }
         
       

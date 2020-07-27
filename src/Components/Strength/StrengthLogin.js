@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import axios from 'axios'
 import StudentNav from '../Student/StudentNav';
+import {connect} from 'react-redux';
+import {getUser} from '../../redux/reducer';
 
 
 
@@ -13,7 +15,7 @@ const StrengthLogin = (props) => {
         axios.post('/api/student-login', {first_name,last_name,password})
         //need to send to redux
         .then((res) => {
-            console.log(res.data)
+            props.getUser(res.data)
             props.history.push('/strength/game-notes');
         })
         .catch(err=> {
@@ -53,4 +55,4 @@ const StrengthLogin = (props) => {
           
     
 }
-export default StrengthLogin
+export default connect(null,{getUser})(StrengthLogin);

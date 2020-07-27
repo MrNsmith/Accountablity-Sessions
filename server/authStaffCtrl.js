@@ -54,6 +54,15 @@ module.exports ={
             req.session.destroy();
             res.sendStatus(200);
 
+        },
+        //keeps staff logged in
+        StaffLoggedIn: async( req, res)=> {
+            const db = req.app.get('db');
+            if (req.session.user){
+                console.log (req.session.user.staff_id, "Logged in ctrl");
+                const me = await db.auth_staff.get_staff_id(req.session.user.staff_id);
+                res.status(200).send(me[0]);
+            }
         }
          
          

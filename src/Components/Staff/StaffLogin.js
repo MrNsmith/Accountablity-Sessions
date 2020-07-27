@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios'
+import {getUser} from '../../redux/reducer'
 import {connect} from 'react-redux'
 
 const StaffLogin = (props) => {
@@ -11,7 +12,8 @@ const StaffLogin = (props) => {
         axios.post('/api/staff-login', {first_name,last_name,password})
         //need to send to redux
         .then((res) => {
-            props.getUser(res.data)
+           console.log(props.getUser(res.data))
+           
             props.history.push('/staff/edit/game');
         })
         .catch(err=> {
@@ -44,10 +46,7 @@ const StaffLogin = (props) => {
                    <button onClick={handleLogin}>Login</button>
                 </form>
 
-                {first_name}
-                {last_name}
-                {password}
-
+                
             </div>
         )
           
