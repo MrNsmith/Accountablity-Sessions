@@ -6,7 +6,9 @@ class GameNotes extends Component {
         return (
             <div>
                 Game Notes
+                
                 <StudentNav/>
+
             </div>
         )
     }

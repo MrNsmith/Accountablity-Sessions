@@ -37,7 +37,10 @@ app.post(`/api/staff-login` , staffCtrl.LoginStaff)
 app.get(`/api/staff-logout`, staffCtrl.LogOut)
 app.get(`/api/staff-session`, staffCtrl.StaffLoggedIn)
 //Main Controller
+//gets all students
 app.get(`/api/students`, mainCtrl.GetStudents)
+//creates a slip
+app.post(`/api/slip`, mainCtrl.AddSlip)
 
 app.listen(port, ()=> console.log(`Listening on ${port}`));
 

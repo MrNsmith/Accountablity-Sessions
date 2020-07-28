@@ -26,3 +26,9 @@ game_list_id serial primary key,
 student_id  INTEGER REFERENCES  student(student_id),
 game_id integer references game(game_id)
 );
+CREATE TABLE game_slip(
+slip_id serial primary key,
+played_by  integer references student(student_id),
+played_with  integer references student(student_id),
+date_droped  DATE NOT NULL DEFAULT CURRENT_DATE
+);

@@ -1,22 +1,36 @@
 import React, { Component } from "react";
 import StudentNav from "./StudentNav";
 import { connect } from "react-redux";
+import axios from "axios";
 
 
 class DropSlip extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      user:   props.user,
-      slipChoice: [],
-    };
+      played_by:   {},
+      played_with: {}
+    }
   }
   handleSlipChoice = (event) => {
-    this.setState({ slipChoice: event.target.value });
-  };
+    this.setState({ played_with: event.target.value })
+    this.setState({played_by: this.props.user.student_id})
+    
+  }
+  addSlip = () =>{
+      const {played_by,played_with} = this.state;
+    axios
+    .post(`/api/slip`, {played_by, played_with})
+    .then((res)=>console.log(res))
+    .catch(err=> console.log(err))
+    alert('Your Slip has been submitted')
+    this.props.history.push('/')
+  }
+  
+ 
   render() {
-      console.log(this.state.user)
-    console.log(this.state.slipChoice);
+      console.log(this.state.played_by)
+    console.log(this.state.played_with);
     const mappedStudents = this.props.students.map((student, i) => (
       <div key={i}>
         <p>
@@ -24,6 +38,7 @@ class DropSlip extends Component {
         </p>
         <button value={student.student_id} 
         onClick={this.handleSlipChoice}>Drop Slip</button>
+        <button onClick={this.addSlip}>submit</button>
       </div>
     ));
 
@@ -31,7 +46,7 @@ class DropSlip extends Component {
       <div>
         Drop Slip
         <p>Hello {this.props.user.first_name}</p>
-        <p>Who would You like to Play a Game with ?</p>
+        <p>Who would you like to Play the Game with?</p>
         {mappedStudents}
         <StudentNav />
       </div>
