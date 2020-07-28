@@ -30,5 +30,11 @@ CREATE TABLE game_slip(
 slip_id serial primary key,
 played_by  integer references student(student_id),
 played_with  integer references student(student_id),
-date_droped  DATE NOT NULL DEFAULT CURRENT_DATE
+date_dropped TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+);
+CREATE TABLE game_note(
+    note_id serial primary key,
+    note TEXT ,
+    room INT,
+    game_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 );

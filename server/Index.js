@@ -6,6 +6,7 @@ const express = require('express'),
     studentCtrl = require('./authStudentCtrl'),
     staffCtrl = require('./authStaffCtrl'),
     mainCtrl = require('./mainController'),
+    emailCtrl = require('./emailCtrl'),
     {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
     port = SERVER_PORT,
     app = express();
@@ -36,11 +37,16 @@ app.post(`/api/staff`, staffCtrl.NewStaff)
 app.post(`/api/staff-login` , staffCtrl.LoginStaff)
 app.get(`/api/staff-logout`, staffCtrl.LogOut)
 app.get(`/api/staff-session`, staffCtrl.StaffLoggedIn)
-//Main Controller
+//Email EndPoint
+app.post(`/api/email`, emailCtrl.Email)
+//Main EndPoint
 //gets all students
 app.get(`/api/students`, mainCtrl.GetStudents)
 //creates a slip
 app.post(`/api/slip`, mainCtrl.AddSlip)
+app.get('/api/slip', mainCtrl.GetAllSlips)
+//creates a game note
+app.post(`/api/note`, mainCtrl.AddNote)
 
 app.listen(port, ()=> console.log(`Listening on ${port}`));
 
