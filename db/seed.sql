@@ -38,3 +38,6 @@ CREATE TABLE game_note(
     room INT,
     game_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 );
+CREATE TABLE game_room_1(
+    student_id integer references student(student_id),
+)

@@ -7,6 +7,7 @@ const express = require('express'),
     staffCtrl = require('./authStaffCtrl'),
     mainCtrl = require('./mainController'),
     emailCtrl = require('./emailCtrl'),
+    gameRoomCtrl = require('./gameRoomCtrl'),
     {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
     port = SERVER_PORT,
     app = express();
@@ -39,12 +40,26 @@ app.get(`/api/staff-logout`, staffCtrl.LogOut)
 app.get(`/api/staff-session`, staffCtrl.StaffLoggedIn)
 //Email EndPoint
 app.post(`/api/email`, emailCtrl.Email)
-//Main EndPoint
+
+//Main EndPoints
+
 //gets all students
 app.get(`/api/students`, mainCtrl.GetStudents)
+//adds student to game
+app.post(`/api/room-one`, gameRoomCtrl.AddGameRoomOne)
+app.get(`/api/room-one`, gameRoomCtrl.GetAllRoomOne)
+app.post(`/api/room-two`, gameRoomCtrl.AddGameRoomTwo)
+app.get(`/api/room-two`, gameRoomCtrl.GetAllRoomTwo)
+app.post(`/api/room-three`, gameRoomCtrl.AddGameRoomThree)
+app.get(`/api/room-three`, gameRoomCtrl.GetAllRoomThree)
+app.post(`/api/room-four`, gameRoomCtrl.AddGameRoomFour)
+app.get(`/api/room-four`, gameRoomCtrl.GetAllRoomFour)
 //creates a slip
 app.post(`/api/slip`, mainCtrl.AddSlip)
+//gets all slips
 app.get('/api/slip', mainCtrl.GetAllSlips)
+//delete slip
+app.delete( `/api/slip/:id`, mainCtrl.DeleteSlip)
 //creates a game note
 app.post(`/api/note`, mainCtrl.AddNote)
 

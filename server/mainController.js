@@ -15,13 +15,27 @@ module.exports = {
       .then(() => res.sendStatus(200))
       .catch((err) => console.log(err));
   },
+  // Grabs slips and student info
   GetAllSlips: (req, res) =>{
       const db = req.app.get('db');
       db.slips.get_all_slips()
       .then((slip)=> res.status(200).send(slip))
       .catch((err)=>console.log(err))
       
+      
   },
+  // Delete slip by ID
+  DeleteSlip:(req, res)=>{
+      const {id} = req.params;
+      const db = req.app.get('db');
+
+      db.slips.delete_slip(id)
+      .then(()=> res.sendStatus(200))
+      .catch((err)=> res.status(500).sent(err))
+
+  },
+ 
+
   //Saves game notes to the data base
    AddNote: (req, res) => {
         const{note, room} = req.body,
