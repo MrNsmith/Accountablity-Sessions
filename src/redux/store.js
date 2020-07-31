@@ -1,5 +1,5 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
-import promiseMiddleware from 'react-promise-middleware';
+import promiseMiddleware from 'redux-promise-middleware';
 import reducer from './reducer';
 import gameRoomReducer from './gameRoomReducer'
 const rootReducer = combineReducers({

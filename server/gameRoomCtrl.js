@@ -17,6 +17,13 @@ module.exports = {
     .catch((err)=>console.log(err))
 
   },
+  deleteSlipRoomOne:(req,res)=>{
+    const db = req.app.get('db');
+    const {id}= req.params;
+    db.game_room_one.delete_slip_gr1(id)
+    .then(()=> res.sendStatus(200))
+    .catch((err)=>console.log(err))
+  },
   //Room 2
   AddGameRoomTwo: (req, res) => {
     const { played_by, played_with } = req.body;
@@ -33,6 +40,13 @@ module.exports = {
     .then((players)=> res.status(200).send(players))
     .catch((err)=>console.log(err))
 
+  },
+  deleteSlipRoomTwo:(req,res)=>{
+    const db = req.app.get('db');
+    const {id}= req.params;
+    db.game_room_two.delete_slip_gr2(id)
+    .then(()=> res.sendStatus(200))
+    .catch((err)=>console.log(err))
   },
   //Room 3
   AddGameRoomThree: (req, res) => {
@@ -51,6 +65,13 @@ module.exports = {
     .catch((err)=>console.log(err))
 
   },
+  deleteSlipRoomThree:(req,res)=>{
+    const db = req.app.get('db');
+    const {id}= req.params;
+    db.game_room_three.delete_slip_gr3(id)
+    .then(()=> res.sendStatus(200))
+    .catch((err)=>console.log(err))
+  },
   //Room 4
   AddGameRoomFour: (req, res) => {
     const { played_by, played_with } = req.body;
@@ -67,5 +88,12 @@ module.exports = {
     .then((players)=> res.status(200).send(players))
     .catch((err)=>console.log(err))
 
+  },
+  deleteSlipRoomFour:(req,res)=>{
+    const db = req.app.get('db');
+    const {id}= req.params;
+    db.game_room_four.delete_slip_gr4(id)
+    .then(()=> res.sendStatus(200))
+    .catch((err)=>console.log(err))
   },
 };

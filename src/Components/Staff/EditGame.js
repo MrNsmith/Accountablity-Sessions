@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import StaffNav from "./StaffNav";
 import axios from "axios";
+import {connect} from 'react-redux';
+import {getRoomOne} from '../../redux/gameRoomReducer'
 class EditGame extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +18,40 @@ class EditGame extends Component {
   }
   componentDidMount() {
     this.getAllSlips();
+    ;
   }
-  componentDidUpdate(){
-      this.getAllSlips()
-  }
+
+getRoom1=()=>{
+    axios
+    .get(`api/room-one`)
+    .then((res)=> this.props.getRoomOne(res.data))
+    .catch(err=> console.log(err))
+}
+getRoom2=()=>{
+    axios
+    .get(`api/room-two`)
+    .then((res)=> this.props.getRoomTwo(res.data))
+    .catch(err=> console.log(err))
+}
+getRoom3=()=>{
+    axios
+    .get(`api/room-three`)
+    .then((res)=> this.props.getRoomThree(res.data))
+    .catch(err=> console.log(err))
+}
+getRoom4=()=>{
+    axios
+    .get(`api/room-four`)
+    .then((res)=> this.props.getRoomFour(res.data))
+    .catch(err=> console.log(err))  
+  
+}
+  getAllSlips = () => {
+    axios
+      .get(`/api/slip`)
+      .then((res) => this.setState({ slips: res.data }))
+      .catch((err) => console.log(err));
+  };
 
   deleteSlips=(id)=>{
       axios
@@ -27,16 +59,7 @@ class EditGame extends Component {
       .then(()=>console.log(`slip number ${id} has been deleted`))
       .catch((err)=> console.log(err))
   }
-  getAllSlips = () => {
-    axios
-      .get(`/api/slip`)
-      .then((res) => this.setState({ slips: res.data }))
-      .catch((err) => console.log(err));
-  };
-  getGameRoomOne=()=>{
-    axios
-        .get(`/api/room-one`)
-  }
+
   handleRoom1Add = (played_by, played_with) => {
     this.setState({ room1: { played_by, played_with } });
     this.addRoomOne()
@@ -49,6 +72,12 @@ class EditGame extends Component {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+  deletePlayerRm1=(id)=>{
+    axios
+    .delete(`/api/room-one/${id}`)
+    .then(()=>console.log(`player been deleted`))
+    .catch((err)=> console.log(err))
+}
   handleRoom2Add = (played_by, played_with) => {
     this.setState({ room2: { played_by, played_with } });
    this.addRoomTwo()
@@ -60,6 +89,12 @@ class EditGame extends Component {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+  deletePlayerRm2=(id)=>{
+    axios
+    .delete(`/api/room-two/${id}`)
+    .then(()=>console.log(`players have been deleted`))
+    .catch((err)=> console.log(err))
+}
   handleRoom3Add = (played_by, played_with) => {
     this.setState({ room3: { played_by, played_with } });
     this.addRoomThree()
@@ -71,6 +106,12 @@ class EditGame extends Component {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+  deletePlayerRm3=(id)=>{
+    axios
+    .delete(`/api/room-three/${id}`)
+    .then(()=>console.log(`players have been deleted`))
+    .catch((err)=> console.log(err))
+}
   handleRoom4Add = (played_by, played_with) => {
     this.setState({ room4: { played_by, played_with } });
     this.addRoomFour()
@@ -82,9 +123,47 @@ class EditGame extends Component {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+  deletePlayerRm4=(id)=>{
+    axios
+    .delete(`/api/room-four/${id}`)
+    .then(()=>console.log(`players have been deleted`))
+    .catch((err)=> console.log(err))
+}
   render() {
-    // console.log(this.state.room1);
-
+  
+   const mappedRoomOne = this.props.gameRoomReducer.room1.map((student, i)=>(
+       <div key={i}>
+           <p>{student.first_name}</p>
+           <p>{student.student_first}</p>
+           <p>{student.slip_id}</p>
+           <button onClick={()=>this.deletePlayerRm1(student.slip_id)}>Remove Slip</button>
+       </div>
+   ))
+   const mappedRoomTwo = this.props.gameRoomReducer.room2.map((student, i)=>(
+       <div key={i}>
+           <p>{student.first_name}</p>
+           <p>{student.student_first}</p>
+           <p>{student.slip_id}</p>
+           <button onClick={()=>this.deletePlayerRm2(student.slip_id)}>Remove Slip</button>
+       </div>
+   ))
+   const mappedRoomThree = this.props.gameRoomReducer.room3.map((student, i)=>(
+       <div key={i}>
+           <p>{student.first_name}</p>
+           <p>{student.student_first}</p>
+           <p>{student.slip_id}</p>
+           <button onClick={()=>this.deletePlayerRm3(student.slip_id)}>Remove Slip</button>
+       </div>
+   ))
+   const mappedRoomFour = this.props.gameRoomReducer.room4.map((student, i)=>(
+       <div key={i}>
+           <p>{student.first_name}</p>
+           <p>{student.student_first}</p>
+           <p>{student.slip_id}</p>
+           <button onClick={()=>this.deletePlayerRm4(student.slip_id)}>Remove Slip</button>
+       </div>
+   ))
+  
     const mappedSlips = this.state.slips.map((slip, i) => (
       <div key={i}>
         <p>{slip.first_name} wants to play the game with</p>
@@ -116,7 +195,15 @@ class EditGame extends Component {
     ));
     return (
       <div>
-        Edit Game
+        <h4>Game Room One</h4>
+       {mappedRoomOne}
+       <h4>Game Room Two</h4>
+       {mappedRoomTwo}
+       <h4>Game Room Three</h4>
+       {mappedRoomThree}
+       <h4>Game Room Four</h4>
+       {mappedRoomFour}
+        <h4>Game Slips</h4>
         {mappedSlips}
        
 
@@ -126,4 +213,6 @@ class EditGame extends Component {
     );
   }
 }
-export default EditGame;
+const mapStateToProps = reduxState => reduxState;
+
+export default connect(mapStateToProps,{getRoomOne})(EditGame);

@@ -1,3 +1,5 @@
+const { deleteSlipRoomOne } = require('./gameRoomCtrl');
+
 require ('dotenv').config();
 
 const express = require('express'),
@@ -45,15 +47,23 @@ app.post(`/api/email`, emailCtrl.Email)
 
 //gets all students
 app.get(`/api/students`, mainCtrl.GetStudents)
-//adds student to game
+// game room 1
 app.post(`/api/room-one`, gameRoomCtrl.AddGameRoomOne)
 app.get(`/api/room-one`, gameRoomCtrl.GetAllRoomOne)
+app.delete(`/api/room-one/:id`, gameRoomCtrl.deleteSlipRoomOne)
+// game room 2
 app.post(`/api/room-two`, gameRoomCtrl.AddGameRoomTwo)
 app.get(`/api/room-two`, gameRoomCtrl.GetAllRoomTwo)
+app.delete(`/api/room-two/:id`, gameRoomCtrl.deleteSlipRoomTwo)
+// game room 3
 app.post(`/api/room-three`, gameRoomCtrl.AddGameRoomThree)
 app.get(`/api/room-three`, gameRoomCtrl.GetAllRoomThree)
+app.delete(`/api/room-three/:id`, gameRoomCtrl.deleteSlipRoomThree)
+// game room 4
 app.post(`/api/room-four`, gameRoomCtrl.AddGameRoomFour)
 app.get(`/api/room-four`, gameRoomCtrl.GetAllRoomFour)
+app.delete(`/api/room-four/:id`, gameRoomCtrl.deleteSlipRoomFour)
+
 //creates a slip
 app.post(`/api/slip`, mainCtrl.AddSlip)
 //gets all slips
