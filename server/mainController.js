@@ -45,5 +45,16 @@ module.exports = {
     .then(() => res.sendStatus(200)) 
     .catch(err => console.log(err)) 
 
+   },
+   UpdateStudentPic:(req, res)=>{
+      const{id} = req.params,
+      {profile_pic}= req.body,
+      db=req.app.get('db');
+      console.log(profile_pic)
+      db.update_student_pic(profile_pic, id)
+      .then(student => res.status(200).send(student))
+      .catch(err => console.log(err))
+
+      
    }
 };

@@ -1,20 +1,22 @@
-const { deleteSlipRoomOne } = require('./gameRoomCtrl');
+
 
 require ('dotenv').config();
 
 const express = require('express'),
-    massive = require('massive'),
-    session = require('express-session'),
-    studentCtrl = require('./authStudentCtrl'),
-    staffCtrl = require('./authStaffCtrl'),
-    mainCtrl = require('./mainController'),
-    emailCtrl = require('./emailCtrl'),
-    gameRoomCtrl = require('./gameRoomCtrl'),
-    {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
+massive = require('massive'),
+session = require('express-session'),
+studentCtrl = require('./authStudentCtrl'),
+staffCtrl = require('./authStaffCtrl'),
+mainCtrl = require('./mainController'),
+emailCtrl = require('./emailCtrl'),
+gameRoomCtrl = require('./gameRoomCtrl'),
+aws = require('aws-sdk'),
+    {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET,S3_BUCKET,AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env,
     port = SERVER_PORT,
     app = express();
 
 app.use(express.json());
+
 
 app.use(session({
     resave:false,
@@ -22,6 +24,34 @@ app.use(session({
     secret: SESSION_SECRET,
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 1}
 }));
+app.get('/api/signs3', (req, res)=> {
+    aws.config ={
+        region: 'us-west-1',
+        accessKeyId: AWS_ACCESS_KEY_ID,
+        secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    };
+    const s3 = new aws.s3();
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: fileName,
+        Expires: 60,
+        ContentType: fileType,
+        ACL: 'public-read',
+    };
+    s3.getSignedUrl('putObject', s3Params, (err, data)=> {
+        if (err){
+            console.log(err);
+            return res.end();
+        }
+        const returnData = {
+            signedRequest: data,
+            url:`https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+        };
+        return res.send(returnData);
+    });
+});
 
 massive({
     connectionString: CONNECTION_STRING,
@@ -47,6 +77,7 @@ app.post(`/api/email`, emailCtrl.Email)
 
 //gets all students
 app.get(`/api/students`, mainCtrl.GetStudents)
+app.put(`/api/student/:id`, mainCtrl.UpdateStudentPic)
 // game room 1
 app.post(`/api/room-one`, gameRoomCtrl.AddGameRoomOne)
 app.get(`/api/room-one`, gameRoomCtrl.GetAllRoomOne)

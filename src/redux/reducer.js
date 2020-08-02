@@ -1,15 +1,22 @@
 const initialState = {
   user: {},
-  students: {},
+  students: [],
 };
 const GET_USER = "GET_USER";
 const GET_STUDENTS = "GET_STUDENTS";
 
 export function getStudents(studentsObj) {
-  return {
-    type: GET_STUDENTS,
-    payload: studentsObj,
-  };
+  if (studentsObj) {
+    return {
+      type: GET_STUDENTS,
+      payload: studentsObj,
+    };
+  } else {
+    return {
+      type: GET_STUDENTS,
+      payload: [],
+    };
+  }
 }
 
 export function getUser(userObj) {

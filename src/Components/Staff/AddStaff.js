@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import StaffNav from './StaffNav'
 import axios from 'axios'
- const EditStaff =(props)=>  {
+ const AddStaff =(props)=>  {
     let [first_name, setFirstname] = useState(''),
         [last_name, setLastname] = useState(''),
         [email, setEmail] = useState(''),
@@ -16,7 +16,7 @@ import axios from 'axios'
         
     return (
         <div>
-            <h1>Edit Staff</h1>
+            <h1>Add Staff</h1>
                 <StaffNav/>
                 <form>
                    <input
@@ -53,4 +53,4 @@ import axios from 'axios'
     )
 
 }
-export default EditStaff;
+export default AddStaff;

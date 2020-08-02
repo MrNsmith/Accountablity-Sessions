@@ -18,11 +18,17 @@ function App(props) {
       .then((res) => props.getStudents(res.data))
       .catch((err) => console.log(err));
   },[]);
-  // this is checking to see if state has changed and if it has run the axios request again.
-  useEffect(() => {getRoom1()}, [props.gameRoomReducer.room1]);
-  useEffect(() => {getRoom2()}, [props.gameRoomReducer.room2]);
-  useEffect(() => {getRoom3()}, [props.gameRoomReducer.room3]);
-  useEffect(() => {getRoom4()}, [props.gameRoomReducer.room4]);
+  //this loads the function initially
+  useEffect(() => {getRoom1()},[]);
+  useEffect(() => {getRoom2()},[]);
+  useEffect(() => {getRoom3()},[]);
+  useEffect(() => {getRoom4()},[]);
+
+  // this is checking to see if state has changed and if it has run the axios request again
+  // useEffect(() => {getRoom1()}, [props.gameRoomReducer.room1]);
+  // useEffect(() => {getRoom2()}, [props.gameRoomReducer.room2]);
+  // useEffect(() => {getRoom3()}, [props.gameRoomReducer.room3]);
+  // useEffect(() => {getRoom4()}, [props.gameRoomReducer.room4]);
   
 
   const getRoom1 = () =>{

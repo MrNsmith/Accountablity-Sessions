@@ -1,22 +1,21 @@
 import React, { useState} from 'react';
 import StaffNav from './StaffNav'
 import axios from 'axios'
- const EditStaff =(props)=>  {
+ const AddStudent =(props)=>  {
     let [first_name, setFirstname] = useState(''),
         [last_name, setLastname] = useState(''),
-        [email, setEmail] = useState(''),
         [password, setPassword] = useState('');
 
-    let handleNewStaff = ()=> {
-        axios.post('/api/staff' , {first_name,last_name,email,password})
+    let handleNewStudent = ()=> {
+        axios.post('/api/student' , {first_name,last_name,password})
      
-        .then((res)=>console.log(res))
+        .then((res)=> res.sendStatus(200))
         .catch((err)=>console.log(err))
     }   
         
     return (
         <div>
-            <h1>Edit Staff</h1>
+            <h1>Add Student</h1>
                 <StaffNav/>
                 <form>
                    <input
@@ -31,13 +30,7 @@ import axios from 'axios'
                    name='last_name'
                    onChange={e => setLastname(e.target.value)}
                    />
-                   <input
-                   value={email}
-                   type='email'
-                   placeholder='E-Mail'
-                   name='email'
-                   onChange={e => setEmail(e.target.value)}
-                   />
+                  
                    <input
                    value={password}
                    type='password'
@@ -46,11 +39,11 @@ import axios from 'axios'
                    onChange={e => setPassword(e.target.value)}
                    />
                    {first_name}
-                   <button onClick={handleNewStaff}>ADD</button>
+                   <button onClick={handleNewStudent}>ADD</button>
                 </form>
 
         </div>
     )
 
 }
-export default EditStaff;
+export default AddStudent;

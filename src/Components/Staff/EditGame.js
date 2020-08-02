@@ -20,32 +20,8 @@ class EditGame extends Component {
     this.getAllSlips();
     ;
   }
-
-getRoom1=()=>{
-    axios
-    .get(`api/room-one`)
-    .then((res)=> this.props.getRoomOne(res.data))
-    .catch(err=> console.log(err))
-}
-getRoom2=()=>{
-    axios
-    .get(`api/room-two`)
-    .then((res)=> this.props.getRoomTwo(res.data))
-    .catch(err=> console.log(err))
-}
-getRoom3=()=>{
-    axios
-    .get(`api/room-three`)
-    .then((res)=> this.props.getRoomThree(res.data))
-    .catch(err=> console.log(err))
-}
-getRoom4=()=>{
-    axios
-    .get(`api/room-four`)
-    .then((res)=> this.props.getRoomFour(res.data))
-    .catch(err=> console.log(err))  
   
-}
+
   getAllSlips = () => {
     axios
       .get(`/api/slip`)
@@ -136,7 +112,8 @@ getRoom4=()=>{
            <p>{student.first_name}</p>
            <p>{student.student_first}</p>
            <p>{student.slip_id}</p>
-           <button onClick={()=>this.deletePlayerRm1(student.slip_id)}>Remove Slip</button>
+           <button onClick={()=>this.deletePlayerRm1(student.slip_id)}>delete Slip</button>
+           
        </div>
    ))
    const mappedRoomTwo = this.props.gameRoomReducer.room2.map((student, i)=>(

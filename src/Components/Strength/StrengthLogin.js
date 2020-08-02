@@ -46,9 +46,10 @@ const StrengthLogin = (props) => {
                    onChange={e => setPassword(e.target.value)}
                    />
                    <button onClick={handleLogin}>Login</button>
+                   <button onClick={()=>props.history.push('/')}>Go back</button>
                 </form>
 
-                <StudentNav/>
+               
 
             </div>
         )
