@@ -23,9 +23,9 @@ const StrengthLogin = (props) => {
         })
     }
         return (
-            <div>
-                Strength Login
-                <form>
+            <div className='login-main'>
+                <h1 className='title'>Strength Login</h1>
+                <form className='login-form'>
                    <input
                    value={first_name}
                    placeholder='First Name'

@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
-import axios from 'axios'
-import StudentNav from './StudentNav';
-import {connect} from 'react-redux'
+import axios from 'axios';
+import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer'
 
 
@@ -23,9 +22,9 @@ const StudentLogin = (props) => {
         })
     }
         return (
-            <div>
-                Student Login
-                <form>
+            <div className='login-main'>
+                <h1 className='title'>Student Login</h1>
+                <form className='login-form'>
                    <input
                    value={first_name}
                    placeholder='First Name'

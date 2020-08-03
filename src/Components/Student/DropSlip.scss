@@ -1,0 +1,33 @@
+.student-box{
+    display: flex;
+    flex-direction: column;
+    border-width: thick;
+    border-color: white;
+  
+    button{
+        width: 55px;
+        height: 55px;
+        font-size: small;
+    }
+    p{
+        color: white;
+        font-weight: bold;
+    }
+  
+   
+}
+
+.student-flex{
+    padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: space-around;
+
+    
+    
+}
+.drop-slip{
+   
+    width: 100vw;
+    height: 100vh;
+}

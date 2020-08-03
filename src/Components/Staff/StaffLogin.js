@@ -21,9 +21,10 @@ const StaffLogin = (props) => {
         })
     }
         return (
-            <div>
-                Staff Login
-                <form>
+            <div className='login-main'>
+                
+               <h1 className='title'>Staff Login</h1> 
+                <form className='login-form'>
                    <input
                    value={first_name}
                    placeholder='First Name'

@@ -1,0 +1,24 @@
+@import '../../Sass/scss/variables';
+
+
+.landing {
+    display: flex;
+    padding-top: 14px;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    button {
+        margin:15px;
+        width: 100vh;
+        height: 20vh;
+        align-items: center;
+        border-width: thick;
+        border-color: $Tea-Green;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: large;
+        background-image: linear-gradient(15deg,$Dim-Grey,$Rich-Black,$Blue-Munsell);
+        color:$Tea-Green;
+    }
+   
+    
+}
