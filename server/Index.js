@@ -24,13 +24,14 @@ app.use(session({
     secret: SESSION_SECRET,
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 1}
 }));
-app.get('/api/signs3', (req, res)=> {
+app.get('/sign-s3', (req, res)=> {
+    console.log(req.query)
     aws.config ={
         region: 'us-west-1',
         accessKeyId: AWS_ACCESS_KEY_ID,
         secretAccessKey: AWS_SECRET_ACCESS_KEY,
     };
-    const s3 = new aws.s3();
+    const s3 = new aws.S3({signatureVersion:'v4'});
     const fileName = req.query['file-name'];
     const fileType = req.query['file-type'];
     const s3Params = {
