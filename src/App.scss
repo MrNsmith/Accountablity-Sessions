@@ -125,11 +125,11 @@ table {
   border-spacing: 0;
 }
 
-//all new
+//all new SASS
 * {
   font-family: $font-stack;
   text-decoration: none;
-  color: $Tea-Green;
+  color:$Tea-Green
 }
 .App {
   text-align: center;
@@ -139,6 +139,7 @@ body {
   background-image: linear-gradient(98deg, $Blue-Munsell, $Rich-Black);
 }
 .title{
+  color:$Tea-Green;
 	margin-top: 15px;
 	width: 150vw;
 	height: 13vh;
@@ -171,8 +172,9 @@ body {
   border-color: $Tea-Green;
 }
 button {
+  color: $Tea-Green;
   margin: 15px;
-  width: 35vh;
+  width: 25vw;
   height: 6vh;
   align-items: center;
   border-width: thin;
@@ -185,8 +187,13 @@ button {
     $Rich-Black,
     $Blue-Munsell
   );
-  color: $Tea-Green;
 }
+
 input{
-	color:$Rich-Black;
+  border:8px, solid, $Rich-Black;
+  color:$Rich-Black;
+  width:85%;
+}
+@media(min-width:936px){
+  
 }

@@ -3,17 +3,23 @@
     flex-direction: column;
     border-width: thick;
     border-color: white;
+    
+   
   
     button{
         width: 55px;
         height: 55px;
         font-size: small;
+        align-items: center;
     }
     p{
         color: white;
         font-weight: bold;
     }
-  
+    img{
+        width: 15vw;
+        height: 15vh;
+    }
    
 }
 

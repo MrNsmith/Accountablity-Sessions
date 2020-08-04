@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StudentNav from '../Student/StudentNav';
 import axios from 'axios';
+import '../Strength/GameNotes.scss';
 
 class GameNotes extends Component {
     constructor(props){
@@ -31,20 +32,21 @@ class GameNotes extends Component {
     }
 
     render(){
-        console.log(this.state.room)
-        console.log(this.state.note)
+       
         return (
-            <div>
-               <h1>Game Notes</h1> 
-                    <label >  Choose a room :</label>
-                    <select onChange={this.handelChange}>
-                        <option value='1'>One</option>
-                        <option value='2'>Two</option>
-                        <option value='3'>Three</option>
-                        <option value='4'>Four</option>
+            <div className='main-div'>
+               <h1 className='title'>Game Notes</h1> 
+                    
+                    <label >  Choose a room</label>
+                    <select className='opt' onChange={this.handelChange}>
+                        <option  value='1'>One</option>
+                        <option  value='2'>Two</option>
+                        <option  value='3'>Three</option>
+                        <option  value='4'>Four</option>
                     </select>
+                    
                     <div>
-                    <textarea onChange={this.handelNotes} rows='15' cols="50"></textarea>
+                    <textarea placeholder='TYPE NOTES HERE ...' className='text-area' onChange={this.handelNotes} ></textarea>
 
                     </div>
                     <button onClick={this.addNote}>Save</button>

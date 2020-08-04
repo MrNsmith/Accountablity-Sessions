@@ -172,6 +172,7 @@ class EditGame extends Component {
     ));
     return (
       <div>
+      <StaffNav />
         <h4>Game Room One</h4>
        {mappedRoomOne}
        <h4>Game Room Two</h4>
@@ -185,7 +186,6 @@ class EditGame extends Component {
        
 
         
-        <StaffNav />
       </div>
     );
   }

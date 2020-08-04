@@ -54,7 +54,7 @@ const uploadFile = (files, signedRequest, url) => {
             alert(`ERROR: ${err.status}\n ${err.stack}`);
         }
     });
-
+    
 }
     let AddStudentPic = (id)=> {
         axios.put(`/api/student/${id}`, {profile_pic})
@@ -71,11 +71,11 @@ const uploadFile = (files, signedRequest, url) => {
                     acceptedFiles.map((file)=> Object.assign(file, {
                         preview: URL.createObjectURL(file)
                     }))
-                )
-            }
-        })
-        const images = files.map((file)=>
-        <div key={file.name}>
+                    )
+                }
+            })
+            const images = files.map((file)=>
+            <div key={file.name}>
             <div>
                 <img src={file.preview} style={{width:"150px"}} alt='preview'/>
             </div>
@@ -97,7 +97,7 @@ const uploadFile = (files, signedRequest, url) => {
             </div>
         )
     }  
-  
+    
     const mappedStudents = props.reducer.students.map((student, i) => (
         <div key={i}>
          <form>
@@ -110,8 +110,9 @@ const uploadFile = (files, signedRequest, url) => {
          
         </div>
       ));
-    return (
-        <div>
+      return (
+          <div>
+          <StaffNav/>
             <h1>Edit Student</h1>
             {mappedStudents}
             {MyDropzone()}
@@ -120,7 +121,6 @@ const uploadFile = (files, signedRequest, url) => {
              
             
                     
-                <StaffNav/>
                 
 
         </div>

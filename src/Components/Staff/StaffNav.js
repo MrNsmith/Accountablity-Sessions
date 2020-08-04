@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
+import '../Staff/StaffNav.scss'
 const StaffNav = () => {
     const handleLogout=()=>{
         axios.get('/api/staff-logout')
@@ -8,15 +9,17 @@ const StaffNav = () => {
         .catch((err)=> console.log(err))
     }
         return (
-            <div>
+            <div className='nav-container'>
                 
-                <nav><Link to = '/staff/add/staff'>Add Staff</Link></nav>
-                <nav><Link to = '/staff/add/student'>Add Student</Link></nav>
-                <nav><Link to = '/staff/edit/staff'>Edit Staff</Link></nav>
-                <nav><Link to = '/staff/edit/student'>Edit Student</Link></nav>
-                <nav><Link to = '/staff/edit/game'>Edit Game</Link></nav>
+                <nav className='nav'>
+                <Link className='nav-links' to = '/staff/add/staff'>Add Staff</Link>
+                <Link className='nav-links' to = '/staff/add/student'>Add Student</Link>
+                <Link className='nav-links' to = '/staff/edit/staff'>Edit Staff</Link>
+                <Link className='nav-links' to = '/staff/edit/student'>Edit Student</Link>
+                <Link className='nav-links' to = '/staff/edit/game'>Edit Game</Link>
+                <Link className='nav-links' onClick={handleLogout} to = '/'> Logout</Link>
+                </nav>
 
-                <button onClick={handleLogout}><Link to = '/'>Logout</Link></button>
             </div>
         )
     
