@@ -3,6 +3,7 @@ import StaffNav from "./StaffNav";
 import axios from "axios";
 import {connect} from 'react-redux';
 import {getRoomOne} from '../../redux/gameRoomReducer'
+import '../Staff/EditGame.scss';
 class EditGame extends Component {
   constructor(props) {
     super(props);
@@ -108,41 +109,39 @@ class EditGame extends Component {
   render() {
   
    const mappedRoomOne = this.props.gameRoomReducer.room1.map((student, i)=>(
-       <div key={i}>
-           <p>{student.first_name}</p>
-           <p>{student.student_first}</p>
-           <p>{student.slip_id}</p>
-           <button onClick={()=>this.deletePlayerRm1(student.slip_id)}>delete Slip</button>
+       <div  className = 'game-slip-box' key={i}>
+         <div>
+           <p>{student.first_name} {student.last_name}</p>
+           <p>{student.student_first} {student.student_last}</p>
+        </div>
+           <button onClick={()=>this.deletePlayerRm1(student.slip_id)}>Remove Slip</button>
            
        </div>
    ))
    const mappedRoomTwo = this.props.gameRoomReducer.room2.map((student, i)=>(
-       <div key={i}>
-           <p>{student.first_name}</p>
-           <p>{student.student_first}</p>
-           <p>{student.slip_id}</p>
+       <div  className = 'game-slip-box' key={i}>
+           <p>{student.first_name} {student.last_name}</p>
+          <p>{student.student_first} {student.student_last}</p>
            <button onClick={()=>this.deletePlayerRm2(student.slip_id)}>Remove Slip</button>
        </div>
    ))
    const mappedRoomThree = this.props.gameRoomReducer.room3.map((student, i)=>(
-       <div key={i}>
-           <p>{student.first_name}</p>
-           <p>{student.student_first}</p>
-           <p>{student.slip_id}</p>
+       <div  className = 'game-slip-box' key={i}>
+           <p>{student.first_name} {student.last_name}</p>
+           <p>{student.student_first} {student.student_last}</p>
            <button onClick={()=>this.deletePlayerRm3(student.slip_id)}>Remove Slip</button>
        </div>
    ))
    const mappedRoomFour = this.props.gameRoomReducer.room4.map((student, i)=>(
-       <div key={i}>
-           <p>{student.first_name}</p>
-           <p>{student.student_first}</p>
-           <p>{student.slip_id}</p>
+       <div  className = 'game-slip-box' key={i}>
+           <p>{student.first_name} {student.last_name}</p>
+           <p>{student.student_first} {student.student_last}</p>
            <button onClick={()=>this.deletePlayerRm4(student.slip_id)}>Remove Slip</button>
        </div>
    ))
   
     const mappedSlips = this.state.slips.map((slip, i) => (
-      <div key={i}>
+      <div className='game-slip-box'key={i}>
         <p>{slip.first_name} wants to play the game with</p>
         <p>{slip.played_with_first}</p>
         <button
@@ -173,16 +172,26 @@ class EditGame extends Component {
     return (
       <div>
       <StaffNav />
-        <h4>Game Room One</h4>
-       {mappedRoomOne}
-       <h4>Game Room Two</h4>
-       {mappedRoomTwo}
+      <section className = 'game-room'>
+        <h4 >Game Room One</h4>
+       <div className='game-slip-flex'>{mappedRoomOne}</div>
+       </section>
+       <section className = 'game-room'>
+       <h4 >Game Room Two</h4>
+       <div className='game-slip-flex' >{mappedRoomTwo}</div>
+       </section>
+       <section className = 'game-room'>
        <h4>Game Room Three</h4>
-       {mappedRoomThree}
-       <h4>Game Room Four</h4>
-       {mappedRoomFour}
-        <h4>Game Slips</h4>
-        {mappedSlips}
+       <div className='game-slip-flex' >{mappedRoomThree}</div>
+       </section>
+       <section className = 'game-room'>
+       <h4 >Game Room Four</h4>
+       <div className='game-slip-flex'>{mappedRoomFour}</div>
+       </section>
+       <div> {mappedSlips}</div>
+       
+       
+        
        
 
         
