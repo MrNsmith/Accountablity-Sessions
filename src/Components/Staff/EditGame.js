@@ -141,33 +141,37 @@ class EditGame extends Component {
    ))
   
     const mappedSlips = this.state.slips.map((slip, i) => (
-      <div className='game-slip-box'key={i}>
-        <p>{slip.first_name} wants to play the game with</p>
-        <p>{slip.played_with_first}</p>
+      <div className='slip-box' key={i}>
+        <div>
+        <p>{slip.first_name} {slip.last_name} would like to play a Game with</p>
+    <p>{slip.played_with_first} {slip.played_with_last}. Please choose a room</p>
+        </div>
+        <div>
         <button
           onClick={()=>this.handleRoom1Add(slip.played_by, slip.played_with)}
         >
-          ROOM1
+          R1
         </button>
         <button
           onClick={()=>this.handleRoom2Add(slip.played_by, slip.played_with)}
         >
-          ROOM2
+          R2
         </button>
         <button
           onClick={()=>this.handleRoom3Add(slip.played_by, slip.played_with)}
         >
-          ROOM3
+          R3
         </button>
         <button
           onClick={()=> this.handleRoom4Add(slip.played_by, slip.played_with)}
         >
-          ROOM4
+          R4
         </button>
-        <div>
+        
             <button onClick={()=>this.deleteSlips(slip.slip_id)}>Delete Slip</button>
         </div>
       </div>
+     
     ));
     return (
       <div>
@@ -188,7 +192,7 @@ class EditGame extends Component {
        <h4 >Game Room Four</h4>
        <div className='game-slip-flex'>{mappedRoomFour}</div>
        </section>
-       <div> {mappedSlips}</div>
+       <div className='slip-flex'> {mappedSlips}</div>
        
        
         

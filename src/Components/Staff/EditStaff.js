@@ -16,9 +16,10 @@ import axios from 'axios'
         
     return (
         <div>
-            <h1>Edit Staff</h1>
-                <StaffNav/>
-                <form>
+             <StaffNav/>
+            <div className='login-main'>
+             <h1 className='title'>Edit Staff</h1>
+                <form className='login-form'>
                    <input
                    value={first_name}
                    placeholder='First Name'
@@ -48,7 +49,7 @@ import axios from 'axios'
                    {first_name}
                    <button onClick={handleNewStaff}>ADD</button>
                 </form>
-
+            </div>
         </div>
     )
 

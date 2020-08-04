@@ -1,0 +1,52 @@
+.student-photo-box{
+    display:flex;
+    height: 25vh;
+    margin:15px;
+    flex-direction: column;
+    border: 5px solid black;
+    
+    button{
+        width: 5vw;
+        height: 8vh;
+        font-size: 11px;
+    }
+    img {
+        padding-left:10px;
+        width: 10vw;
+        height:15vh;
+
+    }
+}
+
+.student-photo-flex{
+    
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-left:9.9vw;
+
+
+}
+.photos{
+    border:2px solid black;
+    display: flex;
+    flex-direction: column;
+    margin-left:37.3vw;
+    width:25vw;
+    height:25vh;
+}
+@media(max-width:1300px){
+    .main-div{
+        padding-top:15vh;
+    }
+}
+@media(max-width:707px){
+    .student-photo-box{
+        
+
+     button{
+        font-size: 6px;
+        width:9vh;
+    }
+}
+}

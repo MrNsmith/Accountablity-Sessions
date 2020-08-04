@@ -1,45 +1,56 @@
-@import  '../../../Sass/scss/variables';
+@import "../../../Sass/scss/variables";
 
-.game-slip-box{
+.game-slip-box {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid $Rich-Black;
+  width: 5vw;
+  height: 15vh;
+  background-color: $Dim-Grey;
+
+  button {
+    width: 33px;
+    height: 25px;
+    font-size: 8px;
+    align-items: center;
+    text-align: center;
+  }
+}
+.game-slip-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.game-room {
+  width: 80vw;
+  border: 2px solid $Tea-Green;
+  margin-left: 9.9vw;
+  margin-bottom: 5px;
+  h4 {
+    font-size: 33px;
+  }
+}
+
+.slip-box{
     display: flex;
     flex-direction: column;
-   border:2px solid $Rich-Black;
-   width: 5vw;
-   height: 15vh;
-   background-color:$Dim-Grey ;
-    
-   
-  
+    border:7px solid $Rich-Black;
+    padding-top:15px;
+    margin: 5px;
     button{
-        width: 33px;
-        height: 25px;
-        font-size: 8px;
-        align-items: center;
-        text-align: center;
-        
+        width: 5vw;
+        height: 9vh;
     }
-    
-    
-    
 }
-.game-slip-flex{
-    display: flex;
-    flex-wrap: wrap;
+.slip-flex{
+    margin-left:9.9vw;
+    width: 80vw;
+    display:flex;
+    flex-wrap:wrap;
     justify-content: space-around;
 }
-.game-room{
-   
-    width: 80vw;
-    border: 2px solid $Tea-Green;
-    margin-left:9.9vw;
-    margin-bottom:5px;
-   h4{
-       font-size: 33px;
-   }
+@media (max-width: 1300px) {
+  .game-room {
+    margin-top: 10vh;
+  }
 }
-@media(max-width:1300px){
-    .game-room{
-        margin-top:10vh;
-    }
-}
-

@@ -4,6 +4,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {v4 as randomString} from 'uuid';
 import {useDropzone} from 'react-dropzone';
+import '../Staff/EditStudent.scss';
 
 
  const EditStudent =(props)=>  {
@@ -16,7 +17,7 @@ import {useDropzone} from 'react-dropzone';
        
 const getSignedRequest =([files])=>{
     setUploading(!isUploading);
-    console.log(files)
+   
     const fileName = `${randomString()}-${files.name.replace(/\s/g,'-')}`;
     axios.get(`/sign-s3`, {
         params: {
@@ -62,6 +63,7 @@ const uploadFile = (files, signedRequest, url) => {
         .then((res)=> console.log(res))
         .catch((err)=>console.log(err))
         setProfile_pic('')
+        props.history.push('/staff/edit/student')
     } 
     function MyDropzone(){
         const {getRootProps, getInputProps, isDragActive} = useDropzone({
@@ -83,7 +85,7 @@ const uploadFile = (files, signedRequest, url) => {
         )
         console.log(files)
         return (
-            <div id='photos'>
+            <div id='photos' className='photos'>
                 <h1>Upload</h1>
                 {images}
                 <div {...getRootProps()}>
@@ -99,9 +101,10 @@ const uploadFile = (files, signedRequest, url) => {
     }  
     
     const mappedStudents = props.reducer.students.map((student, i) => (
-        <div key={i}>
+        <div  className ='student-photo-box' key={i}>
          <form>
-             <p>{student.first_name}</p>
+             <p>{student.first_name} {student.last_name}</p>
+             <img src={student.profile_pic}/>
                     <button onClick={()=>AddStudentPic(student.student_id)}> Add Profile Pic</button>
                   
               
@@ -113,11 +116,17 @@ const uploadFile = (files, signedRequest, url) => {
       return (
           <div>
           <StaffNav/>
+          <div className='main-div'>
+              <div >
             <h1>Edit Student</h1>
-            {mappedStudents}
+           <div className='student-photo-flex'>
+           {mappedStudents}
+            </div> 
             {MyDropzone()}
             <button id='submit-photo' onClick={()=> getSignedRequest(files)}>Submit Photo</button>
-            
+
+              </div>
+              </div>
              
             
                     
