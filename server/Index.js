@@ -1,7 +1,8 @@
+const { response } = require('express');
 
 
 require ('dotenv').config();
-
+const path = require('path');
 const express = require('express'),
 massive = require('massive'),
 session = require('express-session'),
@@ -24,6 +25,11 @@ app.use(session({
     secret: SESSION_SECRET,
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 1}
 }));
+app.use(express.static(__dirname + '/../build'))
+
+app.get('*', (req, res)=> {
+    res.sendFile(path.join(__dirname , '../build/index.html'))
+})
 app.get('/sign-s3', (req, res)=> {
     console.log(req.query)
     aws.config ={

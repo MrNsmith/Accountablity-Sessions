@@ -24,11 +24,11 @@ function App(props) {
   // this is checking to see if state has changed and if it has run the axios request again
   useEffect(()=>{allStudent()
 
-  },[props.reducer.students])
-  // useEffect(() => {getRoom1()}, [props.gameRoomReducer.room1]);
-  // useEffect(() => {getRoom2()}, [props.gameRoomReducer.room2]);
-  // useEffect(() => {getRoom3()}, [props.gameRoomReducer.room3]);
-  // useEffect(() => {getRoom4()}, [props.gameRoomReducer.room4]);
+  },[props.reducer.students]);
+  useEffect(() => {getRoom1()}, [props.gameRoomReducer.room1]);
+  useEffect(() => {getRoom2()}, [props.gameRoomReducer.room2]);
+  useEffect(() => {getRoom3()}, [props.gameRoomReducer.room3]);
+  useEffect(() => {getRoom4()}, [props.gameRoomReducer.room4]);
   
   function allStudent (){
     axios
