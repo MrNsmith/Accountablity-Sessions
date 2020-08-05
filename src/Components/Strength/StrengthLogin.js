@@ -11,7 +11,8 @@ const StrengthLogin = (props) => {
         [last_name, setLastname] = useState(''),
         [password, setPassword] = useState('');
     
-   let handleLogin = ()=> {
+   let handleLogin = (e)=> {
+    e.preventDefault()
         axios.post('/api/student-login', {first_name,last_name,password})
         //need to send to redux
         .then((res) => {

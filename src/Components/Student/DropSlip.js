@@ -58,9 +58,10 @@ class DropSlip extends Component {
       <div className="drop-slip">
         <p>
           Hello
-          <p>
-            <img src={this.props.reducer.user.profile_pic} alt="pic" />
           </p>
+            <img src={this.props.reducer.user.profile_pic} alt="pic" />
+          <p>
+
           {this.props.reducer.user.first_name}
         </p>
 

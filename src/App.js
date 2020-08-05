@@ -12,9 +12,13 @@ import {
 import axios from "axios";
 
 function App(props) {
-  useEffect(() => {allStudent()
-   
-  },[]);
+  const [studentsSnapShot, setStudentsSnapShot] = React.useState(null);
+  const [roomOneSnapShot, setRoomOneSnapShot] = React.useState(null);
+  const [roomTwoSnapShot, setRoomTwoSnapShot] = React.useState(null);
+  const [roomThreeSnapShot, setRoomThreeSnapShot] = React.useState(null);
+  const [roomFourSnapShot, setRoomFourSnapShot] = React.useState(null);
+
+  useEffect(() => {allStudent()},[]);
   //this loads the function initially
   useEffect(() => {getRoom1()},[]);
   useEffect(() => {getRoom2()},[]);
@@ -22,43 +26,66 @@ function App(props) {
   useEffect(() => {getRoom4()},[]);
 
   // this is checking to see if state has changed and if it has run the axios request again
-  useEffect(()=>{allStudent()
-
-  },[props.reducer.students]);
+  useEffect(()=>{allStudent()},[props.reducer.students]);
   useEffect(() => {getRoom1()}, [props.gameRoomReducer.room1]);
   useEffect(() => {getRoom2()}, [props.gameRoomReducer.room2]);
   useEffect(() => {getRoom3()}, [props.gameRoomReducer.room3]);
   useEffect(() => {getRoom4()}, [props.gameRoomReducer.room4]);
   
   function allStudent (){
-    axios
-    .get(`/api/students`)
-    .then((res) => props.getStudents(res.data))
-    .catch((err) => console.log(err));
+    if(JSON.stringify(studentsSnapShot) !== JSON.stringify(props.reducer.students)) {// a checks to see if the state has changed from previous props.
+      axios
+      .get(`/api/students`)
+      .then((res) => {
+        setStudentsSnapShot(res.data)
+        props.getStudents(res.data)
+      })
+      .catch((err) => console.log(err));
+    }
   }
-  const getRoom1 = () =>{
+  function getRoom1 (){
+    if(JSON.stringify(roomOneSnapShot) !== JSON.stringify(props.gameRoomReducer.room1)) {
     axios
       .get(`api/room-one`)
-      .then((res) => props.getRoomOne(res.data))
+      .then((res) => {
+        setRoomOneSnapShot(res.data)
+        props.getRoomOne(res.data)
+      })
       .catch((err) => console.log(err));
+    }
   };
-  const getRoom2 = () => {
+  function getRoom2 () {
+    if(JSON.stringify(roomTwoSnapShot) !== JSON.stringify(props.gameRoomReducer.room2)) {
     axios
       .get(`api/room-two`)
-      .then((res) => props.getRoomTwo(res.data))
+      .then((res) => {
+        setRoomTwoSnapShot(res.data)
+        props.getRoomTwo(res.data)
+      })
       .catch((err) => console.log(err));
+    }
   };
- const getRoom3 = () => {
+ function getRoom3 () {
+  if(JSON.stringify(roomThreeSnapShot) !== JSON.stringify(props.gameRoomReducer.room3)) {
     axios
       .get(`api/room-three`)
-      .then((res) => props.getRoomThree(res.data))
+      .then((res) => {
+        setRoomThreeSnapShot(res.data)
+        props.getRoomThree(res.data)
+      })
       .catch((err) => console.log(err));
+    }
   };
-  const getRoom4 = () => {
+  function getRoom4  () {
+    if(JSON.stringify(roomFourSnapShot) !== JSON.stringify(props.gameRoomReducer.room4)) {
     axios
       .get(`api/room-four`)
-      .then((res) => props.getRoomFour(res.data))
+      .then((res) => {
+        setRoomFourSnapShot(res.data)
+        props.getRoomFour(res.data)
+      })
       .catch((err) => console.log(err));
+    }
   };
 
  
@@ -66,8 +93,8 @@ function App(props) {
 }
 const mapStateToProps = (reduxState) => reduxState;
 export default connect(mapStateToProps, {
-  getStudents,
   getRoomOne,
+  getStudents,
   getRoomTwo,
   getRoomThree,
   getRoomFour,

@@ -1,4 +1,4 @@
-const { response } = require('express');
+// const { response } = require('express');
 
 
 require ('dotenv').config();
@@ -18,6 +18,8 @@ aws = require('aws-sdk'),
 
 app.use(express.json());
 
+app.use(express.static(__dirname + '/../build'));
+
 
 app.use(session({
     resave:false,
@@ -25,11 +27,6 @@ app.use(session({
     secret: SESSION_SECRET,
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 1}
 }));
-app.use(express.static(__dirname + '/../build'))
-
-app.get('*', (req, res)=> {
-    res.sendFile(path.join(__dirname , '../build/index.html'))
-})
 app.get('/sign-s3', (req, res)=> {
     console.log(req.query)
     aws.config ={
@@ -111,5 +108,7 @@ app.delete( `/api/slip/:id`, mainCtrl.DeleteSlip)
 //creates a game note
 app.post(`/api/note`, mainCtrl.AddNote)
 
+app.get('*', (req, res)=> {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 app.listen(port, ()=> console.log(`Listening on ${port}`));
-

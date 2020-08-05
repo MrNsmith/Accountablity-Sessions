@@ -8,7 +8,9 @@ const StaffLogin = (props) => {
         [last_name, setLastname] = useState(''),
         [password, setPassword] = useState('');
     
-   let handleLogin = ()=> {
+   let handleLogin = (e)=> {
+       //must have to prevent automatic reloading for browser form submission
+       e.preventDefault()
         axios.post('/api/staff-login', {first_name,last_name,password})
         //need to send to redux
         .then((res) => {
