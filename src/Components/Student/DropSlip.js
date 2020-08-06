@@ -32,7 +32,7 @@ class DropSlip extends Component {
       .post(`/api/slip`, { played_by, played_with })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
-    alert("Your Slip has been submitted");
+    alert("Slip has been submitted");
     this.props.history.push("/");
   };
 
