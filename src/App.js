@@ -19,20 +19,20 @@ function App(props) {
   const [roomFourSnapShot, setRoomFourSnapShot] = React.useState(null);
 
   //this loads the function initially
-  useEffect(() => {
-    allStudent();
-    getRoom1();
-    getRoom2();
-    getRoom3();
-    getRoom4();
-  }, [])
+  useEffect(() => { allStudent()},[])
+  useEffect(() => {getRoom1() },[])
+  useEffect(() => { getRoom2()},[])
+  useEffect(() => {  getRoom3()},[])
+  useEffect(() => {getRoom4()},[])
+  
+    
+   
+    
+ 
 
   // this is checking to see if state has changed and if it has run the axios request again
   useEffect(() => {allStudent()}, [props.reducer.students]);
-  useEffect(() => {
-    console.log('HIT getRoom1 useEffect')
-    getRoom1()
-  }, [props.gameRoomReducer.room1]);
+  useEffect(() => {getRoom1()}, [props.gameRoomReducer.room1]);
   useEffect(() => {getRoom2()}, [props.gameRoomReducer.room2]);
   useEffect(() => {getRoom3()}, [props.gameRoomReducer.room3]);
   useEffect(() => {getRoom4()}, [props.gameRoomReducer.room4]);
@@ -49,9 +49,7 @@ function App(props) {
     }
   }
   function getRoom1 (){
-    console.log(JSON.stringify(roomOneSnapShot) === JSON.stringify(props.gameRoomReducer.room1));
-
-    if(JSON.stringify(roomOneSnapShot) !== JSON.stringify(props.gameRoomReducer.room1)) {
+   if(JSON.stringify(roomOneSnapShot) !== JSON.stringify(props.gameRoomReducer.room1)) {
     axios
       .get(`/api/room-one`)
       .then((res) => {
