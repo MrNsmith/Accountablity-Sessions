@@ -19,9 +19,53 @@ class EditGame extends Component {
   }
   componentDidMount() {
     this.getAllSlips();
-    ;
+    this.getRoom1();
+    this.getRoom2();
+    this.getRoom3();
+    this.getRoom4();
+    
   }
   
+
+
+  getRoom1 = ()=>{   
+    axios
+      .get(`/api/room-one`)
+      .then((res) => {
+        this.props.getRoomOne(res.data)
+      })
+      .catch((err) => console.log(err));
+  };
+   getRoom2 =()=> {
+    axios
+      .get(`/api/room-two`)
+      .then((res) => {
+        this.props.getRoomTwo(res.data)
+      })
+      .catch((err) => console.log(err));
+  };
+  getRoom3 = () =>{
+    axios
+      .get(`/api/room-three`)
+      .then((res) => {
+        this.props.getRoomThree(res.data)
+      })
+      .catch((err) => console.log(err));
+  };
+   getRoom4 = () =>{
+    axios
+      .get(`/api/room-four`)
+      .then((res) => {
+        this.props.getRoomFour(res.data)
+      })
+      .catch((err) => console.log(err)); 
+  };
+
+
+
+
+
+
 
   getAllSlips = () => {
     axios
