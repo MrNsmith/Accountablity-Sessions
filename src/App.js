@@ -24,10 +24,7 @@ function App(props) {
   useEffect(() => { getRoom2()},[])
   useEffect(() => {  getRoom3()},[])
   useEffect(() => {getRoom4()},[])
-  
-    
-   
-    
+
  
 
   // this is checking to see if state has changed and if it has run the axios request again

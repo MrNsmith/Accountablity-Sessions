@@ -1,7 +1,8 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import StaffNav from './StaffNav'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {getStudents} from '../../redux/reducer'
 import {v4 as randomString} from 'uuid';
 import {useDropzone} from 'react-dropzone';
 import '../Staff/EditStudent.scss';
@@ -14,57 +15,79 @@ import '../Staff/EditStudent.scss';
     const [profile_pic, setProfile_pic] = useState('');
     const [files, setFiles] = useState([])
 
-       
-const getSignedRequest =([files])=>{
-    setUploading(!isUploading);
-   
-    const fileName = `${randomString()}-${files.name.replace(/\s/g,'-')}`;
-    axios.get(`/sign-s3`, {
-        params: {
-            'file-name':fileName,
-            'file-type': files.type,
+    useEffect(() => { allStudent()},[])
+    const getSignedRequest =([files])=>{
+        setUploading(!isUploading);
         
-        },
-    })
-    .then(response => {
-        const { signedRequest, url} = response.data;
-        uploadFile(files,signedRequest, url);
-    })
-    .catch(err => {
-        console.log(err);
-    });
-};
-const uploadFile = (files, signedRequest, url) => {
-    const options = {
-        headers: {
-            'Content-Type': files.type,
-        },
+        const fileName = `${randomString()}-${files.name.replace(/\s/g,'-')}`;
+        axios.get(`/sign-s3`, {
+            params: {
+                'file-name':fileName,
+                'file-type': files.type,
+                
+            },
+        })
+        .then(response => {
+            const { signedRequest, url} = response.data;
+            uploadFile(files,signedRequest, url);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     };
-    axios.put(signedRequest, files, options)
-    .then(response => {
-        setUploading({isUploading:false, url});
-        setUrl(url)
-        setProfile_pic(url)
-    })
-    .catch(err => {
-        setUploading({isUploading:false})
-        if (err.response.status === 403){
-            alert(`Your request for a signed URL failed with a status 403. Double Check the CORS configuration and bucked policy in the README. ${err.stack}`
-            );
-        }else{
-            alert(`ERROR: ${err.status}\n ${err.stack}`);
-        }
-    });
-    
-}
+    const uploadFile = (files, signedRequest, url) => {
+        const options = {
+            headers: {
+                'Content-Type': files.type,
+            },
+        };
+        axios.put(signedRequest, files, options)
+        .then(response => {
+            setUploading({isUploading:false, url});
+            setUrl(url)
+            setProfile_pic(url)
+        })
+        .catch(err => {
+            setUploading({isUploading:false})
+            if (err.response.status === 403){
+                alert(`Your request for a signed URL failed with a status 403. Double Check the CORS configuration and bucked policy in the README. ${err.stack}`
+                );
+            }else{
+                alert(`ERROR: ${err.status}\n ${err.stack}`);
+            }
+        });
+        
+    }
     let AddStudentPic = (id)=> {
         axios.put(`/api/student/${id}`, {profile_pic})
-     
-        .then((res)=> console.log(res))
+        
+        .then((res)=>{
+        allStudent()
+         console.log(res)
+        })
         .catch((err)=>console.log(err))
         setProfile_pic('')
+
         props.history.push('/staff/edit/student')
     } 
+    function allStudent (){
+        axios
+          .get(`/api/students`)
+          .then((res) => {
+            props.getStudents(res.data)
+          })
+          .catch((err) => console.log(err));
+        
+      }
+      function DeleteStudent(id){
+          axios
+          .delete(`/api/student/${id}`)
+          .then((res)=>{
+              
+          })
+          .catch((err)=> console.log(err))
+          allStudent()
+      }
     function MyDropzone(){
         const {getRootProps, getInputProps, isDragActive} = useDropzone({
             accept: "image/*", 
@@ -79,11 +102,11 @@ const uploadFile = (files, signedRequest, url) => {
             const images = files.map((file)=>
             <div key={file.name}>
             <div>
-                <img src={file.preview} style={{width:"150px"}} alt='preview'/>
+                <img className='dropzone-pic' src={file.preview} style={{width:"150px"}} alt='preview'/>
             </div>
         </div>
         )
-        console.log(files)
+        
         return (
             <div id='photos' className='photos'>
                 <h1>Upload</h1>
@@ -106,6 +129,7 @@ const uploadFile = (files, signedRequest, url) => {
              <p>{student.first_name} {student.last_name}</p>
              <img src={student.profile_pic}/>
                     <button onClick={()=>AddStudentPic(student.student_id)}> Add Profile Pic</button>
+                    <button onClick={()=>DeleteStudent(student.student_id)}> Delete Student</button>
                   
               
                  </form>
@@ -137,4 +161,4 @@ const uploadFile = (files, signedRequest, url) => {
 
 }
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps)(EditStudent);
+export default connect(mapStateToProps,{getStudents})(EditStudent);

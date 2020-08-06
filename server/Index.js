@@ -81,6 +81,7 @@ app.post(`/api/email`, emailCtrl.Email)
 //gets all students
 app.get(`/api/students`, mainCtrl.GetStudents)
 app.put(`/api/student/:id`, mainCtrl.UpdateStudentPic)
+app.delete(`/api/student/:id`, mainCtrl.DeleteStudent)
 // game room 1
 app.post(`/api/room-one`, gameRoomCtrl.AddGameRoomOne)
 app.get(`/api/room-one`, gameRoomCtrl.GetAllRoomOne)

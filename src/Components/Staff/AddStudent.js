@@ -6,11 +6,17 @@ import axios from 'axios'
         [last_name, setLastname] = useState(''),
         [password, setPassword] = useState('');
 
-    let handleNewStudent = ()=> {
+    let handleNewStudent = (e)=> {
+        e.preventDefault()
         axios.post('/api/student' , {first_name,last_name,password})
      
-        .then((res)=> res.sendStatus(200))
-        .catch((err)=>console.log(err))
+        .then((res)=> {
+            res.sendStatus(200)})
+            .catch((err)=>console.log(err))
+            setFirstname('')
+            setLastname('')
+            setPassword('')
+            alert(`Student has been added`)   
     }   
         
     return (
@@ -39,7 +45,7 @@ import axios from 'axios'
                    name='password'
                    onChange={e => setPassword(e.target.value)}
                    />
-                   {first_name}
+                   
                    <button onClick={handleNewStudent}>ADD</button>
                 </form>
             </div>

@@ -6,6 +6,24 @@ module.exports = {
       .then((players) => res.status(200).send(players))
       .catch((err) => console.log(err));
   },
+  UpdateStudentPic:(req, res)=>{
+     const{id} = req.params,
+     {profile_pic}= req.body,
+     db=req.app.get('db');
+     console.log(profile_pic)
+     db.update_student_pic(profile_pic, id)
+     .then(student => res.status(200).send(student))
+     .catch(err => console.log(err))
+
+     },
+    DeleteStudent:(req, res)=>{
+      const {id}= req.params;
+      const db = req.app.get('db');
+      db.delete_student(id)
+      .then(()=> res.sendStatus(200))
+      .catch((err)=> res.status(500).sent(err))
+
+    },
   // Creates a Game slip
   AddSlip: (req, res) => {
     const { played_by, played_with } = req.body,
@@ -46,15 +64,4 @@ module.exports = {
     .catch(err => console.log(err)) 
 
    },
-   UpdateStudentPic:(req, res)=>{
-      const{id} = req.params,
-      {profile_pic}= req.body,
-      db=req.app.get('db');
-      console.log(profile_pic)
-      db.update_student_pic(profile_pic, id)
-      .then(student => res.status(200).send(student))
-      .catch(err => console.log(err))
-
-      
-   }
 };

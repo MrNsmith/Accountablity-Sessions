@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import StudentNav from '../Student/StudentNav';
 import axios from 'axios';
 import '../Strength/GameNotes.scss';
+import {connect} from 'react-redux'
 
 class GameNotes extends Component {
     constructor(props){
@@ -11,7 +12,11 @@ class GameNotes extends Component {
             note: ''
         }
     }
-    
+    componentDidMount(){
+        if(!this.props.reducer.user.first_name){
+            this.props.history.push('/')
+        }
+    }
     handelChange=(event)=>{
         this.setState({room:event.target.value})
     }
@@ -57,4 +62,5 @@ class GameNotes extends Component {
         )
     }
 }
-export default GameNotes
+const mapStateToProps = (reduxState) => reduxState;
+export default connect(mapStateToProps)( GameNotes);

@@ -7,11 +7,17 @@ import axios from 'axios'
         [email, setEmail] = useState(''),
         [password, setPassword] = useState('');
 
-    let handleNewStaff = ()=> {
+    let handleNewStaff = (e)=> {
+        e.preventDefault()
         axios.post('/api/staff' , {first_name,last_name,email,password})
      
         .then((res)=>console.log(res))
         .catch((err)=>console.log(err))
+            setFirstname('')
+            setLastname('')
+            setPassword('')
+            setEmail('')
+            alert(`Staff has been added`)   
     }   
         
     return (

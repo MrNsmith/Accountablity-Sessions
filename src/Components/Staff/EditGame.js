@@ -17,6 +17,11 @@ class EditGame extends Component {
       room4: '',
     };
   }
+  componentWillMount(){
+    if(!this.props.reducer.user.first_name){
+      console.log(this.props)
+  }
+  }
   componentDidMount() {
     this.getAllSlips();
     this.getRoom1();

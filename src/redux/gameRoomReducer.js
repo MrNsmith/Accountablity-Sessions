@@ -11,7 +11,7 @@ const GET_ROOM_THREE = "GET_ROOM_THREE";
 const GET_ROOM_FOUR = "GET_ROOM_FOUR";
 
 export function getRoomOne(room1Obj) {
-  console.log(room1Obj)
+  
   if (room1Obj) {
     return {
       type: GET_ROOM_ONE,
