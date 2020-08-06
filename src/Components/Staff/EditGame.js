@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import StaffNav from "./StaffNav";
 import axios from "axios";
 import {connect} from 'react-redux';
-import {getRoomOne} from '../../redux/gameRoomReducer'
+import {getRoomOne, getRoomTwo, getRoomThree, getRoomFour} from '../../redux/gameRoomReducer'
 import '../Staff/EditGame.scss';
 class EditGame extends Component {
   constructor(props) {
@@ -33,7 +33,11 @@ class EditGame extends Component {
   deleteSlips=(id)=>{
       axios
       .delete(`/api/slip/${id}`)
-      .then(()=>console.log(`slip number ${id} has been deleted`))
+      .then(()=>{
+        console.log(`slip number ${id} has been deleted`)
+
+        this.getAllSlips()
+      })
       .catch((err)=> console.log(err))
   }
 
@@ -46,13 +50,19 @@ class EditGame extends Component {
 
     axios
       .post(`api/room-one`, room1)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        this.props.getRoomOne(res.data)
+      })
       .catch((err) => console.log(err));
   };
   deletePlayerRm1=(id)=>{
     axios
     .delete(`/api/room-one/${id}`)
-    .then(()=>console.log(`player been deleted`))
+    .then((res)=>{
+    console.log(`players have been removed from room one`)
+      this.props.getRoomOne(res.data)
+  })
     .catch((err)=> console.log(err))
 }
   handleRoom2Add = (played_by, played_with) => {
@@ -63,13 +73,20 @@ class EditGame extends Component {
     const { room2 } = this.state;
     axios
       .post(`api/room-two`, room2)
-      .then((res) => console.log(res))
+      .then((res) =>{
+       console.log(res)
+       //sending res.data to redux
+      this.props.getRoomTwo(res.data)
+    })
       .catch((err) => console.log(err));
   };
   deletePlayerRm2=(id)=>{
     axios
     .delete(`/api/room-two/${id}`)
-    .then(()=>console.log(`players have been deleted`))
+    .then((res)=>{
+      console.log(`players have been deleted`)
+      this.props.getRoomTwo(res.data)
+    })
     .catch((err)=> console.log(err))
 }
   handleRoom3Add = (played_by, played_with) => {
@@ -80,13 +97,20 @@ class EditGame extends Component {
     const { room3 } = this.state;
     axios
       .post(`api/room-three`, room3)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        //sending it to redux
+        this.props.getRoomThree(res.data)
+      })
       .catch((err) => console.log(err));
   };
   deletePlayerRm3=(id)=>{
     axios
     .delete(`/api/room-three/${id}`)
-    .then(()=>console.log(`players have been deleted`))
+    .then((res)=>{
+      console.log(`players have been deleted`)
+      this.props.getRoomThree(res.data)
+    })
     .catch((err)=> console.log(err))
 }
   handleRoom4Add = (played_by, played_with) => {
@@ -97,13 +121,20 @@ class EditGame extends Component {
     const { room4 } = this.state;
     axios
       .post(`api/room-four`, room4)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        //sending to redux 
+        this.props.getRoomFour(res.data)
+      })
       .catch((err) => console.log(err));
   };
   deletePlayerRm4=(id)=>{
     axios
     .delete(`/api/room-four/${id}`)
-    .then(()=>console.log(`players have been deleted`))
+    .then((res)=>{
+      console.log(`players have been deleted`)
+      this.props.getRoomFour(res.data)
+    })
     .catch((err)=> console.log(err))
 }
   render() {
@@ -205,4 +236,4 @@ class EditGame extends Component {
 }
 const mapStateToProps = reduxState => reduxState;
 
-export default connect(mapStateToProps,{getRoomOne})(EditGame);
+export default connect(mapStateToProps,{getRoomOne ,getRoomTwo,getRoomThree,getRoomFour})(EditGame);

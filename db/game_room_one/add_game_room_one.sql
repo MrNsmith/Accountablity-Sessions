@@ -1,4 +1,4 @@
 insert into game_room_one
 (played_by,played_with,student_id)
 values
-($1,$2,null)
+($1,$2,null);
