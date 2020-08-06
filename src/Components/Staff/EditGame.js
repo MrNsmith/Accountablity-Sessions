@@ -17,9 +17,9 @@ class EditGame extends Component {
       room4: '',
     };
   }
-  componentWillMount(){
+  componentDidMount(){
     if(!this.props.reducer.user.first_name){
-      console.log(this.props)
+     this.props.history('/')
   }
   }
   componentDidMount() {
@@ -254,22 +254,24 @@ class EditGame extends Component {
      
     ));
     return (
-      <div>
+      <div >
       <StaffNav />
-      <section className = 'game-room'>
+        <div className='game-div' >
+      </div>
         <h4 >Game Room One</h4>
+      <section className = 'game-room'>
        <div className='game-slip-flex'>{mappedRoomOne}</div>
        </section>
-       <section className = 'game-room'>
        <h4 >Game Room Two</h4>
+       <section className = 'game-room'>
        <div className='game-slip-flex' >{mappedRoomTwo}</div>
        </section>
-       <section className = 'game-room'>
        <h4>Game Room Three</h4>
+       <section className = 'game-room'>
        <div className='game-slip-flex' >{mappedRoomThree}</div>
        </section>
-       <section className = 'game-room'>
        <h4 >Game Room Four</h4>
+       <section className = 'game-room'>
        <div className='game-slip-flex'>{mappedRoomFour}</div>
        </section>
        <div className='slip-flex'> {mappedSlips}</div>
