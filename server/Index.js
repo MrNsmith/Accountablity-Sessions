@@ -18,7 +18,6 @@ aws = require('aws-sdk'),
 
 app.use(express.json());
 
-app.use(express.static(__dirname + '/../build'));
 
 
 app.use(session({
@@ -108,6 +107,7 @@ app.delete( `/api/slip/:id`, mainCtrl.DeleteSlip)
 //creates a game note
 app.post(`/api/note`, mainCtrl.AddNote)
 
+app.use(express.static(__dirname + '/../build'));
 app.get('*', (req, res)=> {
     res.sendFile(path.join(__dirname, '../build/index.html'));
 })
