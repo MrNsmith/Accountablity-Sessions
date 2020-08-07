@@ -27,7 +27,7 @@ class GameNotes extends Component {
         const{room,note}= this.state;
         axios.post(`/api/email`, {room,note})
         this.addNote()
-        alert('notes saved and email send')
+        alert('notes saved and email sent')
         this.props.history.push('/')
     }
     addNote=()=>{
