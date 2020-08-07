@@ -98,7 +98,7 @@ class EditGame extends Component {
     const { room1 } = this.state;
 
     axios
-      .post(`api/room-one`, room1)
+      .post(`/api/room-one`, room1)
       .then((res) => {
         console.log(res)
         this.props.getRoomOne(res.data)
@@ -121,7 +121,7 @@ class EditGame extends Component {
   addRoomTwo = () => {
     const { room2 } = this.state;
     axios
-      .post(`api/room-two`, room2)
+      .post(`/api/room-two`, room2)
       .then((res) =>{
        console.log(res)
        //sending res.data to redux
@@ -145,7 +145,7 @@ class EditGame extends Component {
   addRoomThree = () => {
     const { room3 } = this.state;
     axios
-      .post(`api/room-three`, room3)
+      .post(`/api/room-three`, room3)
       .then((res) => {
         console.log(res)
         //sending it to redux
@@ -169,7 +169,7 @@ class EditGame extends Component {
   addRoomFour = () => {
     const { room4 } = this.state;
     axios
-      .post(`api/room-four`, room4)
+      .post(`/api/room-four`, room4)
       .then((res) => {
         console.log(res)
         //sending to redux 
